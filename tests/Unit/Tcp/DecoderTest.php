@@ -58,9 +58,9 @@ class DecoderTest extends TestCase
     {
         (new Decoder)->decodeData(
             '0000000000000003'.     // AVL Packet header
-            'FF'.                   // Unsupported Codec ID
+            'FF'.                   // Unsupported Codec ID FF
             '0000'.                 // Empty AVL collection
-            '00008612'              // CRC
+            '00003030'              // CRC
         );
     }
 }

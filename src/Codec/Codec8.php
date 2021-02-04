@@ -2,12 +2,11 @@
 
 namespace Uro\TeltonikaFmParser\Codec;
 
-use Uro\TeltonikaFmParser\Model\IoValue;
-use Uro\TeltonikaFmParser\Codec\BaseCodec;
-use Uro\TeltonikaFmParser\Model\IoElement;
-use Uro\TeltonikaFmParser\Model\IoProperty;
+use Uro\TeltonikaFmParser\Model\Codec8\IoValue;
+use Uro\TeltonikaFmParser\Model\Codec8\IoElement;
+use Uro\TeltonikaFmParser\Model\Codec8\IoProperty;
 
-class Codec8 extends BaseCodec
+class Codec8 extends BaseCodec8
 {
     public function decodeIoElement(): IoElement
     {
@@ -17,7 +16,7 @@ class Codec8 extends BaseCodec
         ))->addProperties($this->decodeIoProperties());
     }
 
-    private function decodeIoProperties()
+    protected function decodeIoProperties()
     {
         $properties = [];
         for($bytes = 1; $bytes <= 8; $bytes *= 2) {

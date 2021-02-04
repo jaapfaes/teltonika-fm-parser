@@ -1,8 +1,9 @@
 <?php 
 
-namespace Uro\TeltonikaFmParser\Model;
+namespace Uro\TeltonikaFmParser\Model\Codec8;
 
 use Uro\TeltonikaFmParser\Exception\IoValueLengthException;
+use Uro\TeltonikaFmParser\Model\Model;
 
 class IoValue extends Model
 {

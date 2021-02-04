@@ -2,9 +2,8 @@
 
 namespace Uro\TeltonikaFmParser\Codec;
 
-use Uro\TeltonikaFmParser\Model\AvlDataCollection;
-
-interface Codec 
+interface Codec
 {
-    public function decodeAvlDataCollection(): AvlDataCollection;
+    public function decode();
+    public function checkCrc();
 }

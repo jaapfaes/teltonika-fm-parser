@@ -3,8 +3,8 @@
 namespace Tests\Unit\Model;
 
 use PHPUnit\Framework\TestCase;
-use Uro\TeltonikaFmParser\Model\IoProperty;
-use Uro\TeltonikaFmParser\Model\IoValue;
+use Uro\TeltonikaFmParser\Model\Codec8\IoProperty;
+use Uro\TeltonikaFmParser\Model\Codec8\IoValue;
 
 class IoPropertyTest extends TestCase
 {

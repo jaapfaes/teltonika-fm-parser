@@ -3,7 +3,7 @@
 namespace Tests\Unit\Model;
 
 use PHPUnit\Framework\TestCase;
-use Uro\TeltonikaFmParser\Model\AvlDataCollection;
+use Uro\TeltonikaFmParser\Model\Codec8\AvlDataCollection;
 
 class AvlDataCollectionTest extends TestCase
 {

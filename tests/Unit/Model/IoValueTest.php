@@ -4,7 +4,7 @@ namespace Tests\Unit\Model;
 
 use Exception;
 use PHPUnit\Framework\TestCase;
-use Uro\TeltonikaFmParser\Model\IoValue;
+use Uro\TeltonikaFmParser\Model\Codec8\IoValue;
 
 class IoValueTest extends TestCase
 {

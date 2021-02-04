@@ -2,74 +2,42 @@
 
 namespace Uro\TeltonikaFmParser\Codec;
 
+use Uro\TeltonikaFmParser\Exception\CrcMismatchException;
 use Uro\TeltonikaFmParser\Io\Reader;
-use Uro\TeltonikaFmParser\Model\AvlData;
-use Uro\TeltonikaFmParser\Model\GpsElement;
-use Uro\TeltonikaFmParser\Model\AvlDataCollection;
+use Uro\TeltonikaFmParser\Model\Codec8\AvlData;
+use Uro\TeltonikaFmParser\Model\Codec8\GpsElement;
+use Uro\TeltonikaFmParser\Model\Codec8\AvlDataCollection;
 use Uro\TeltonikaFmParser\Exception\NumberOfDataMismatchException;
+use Uro\TeltonikaFmParser\Model\Codec8\Packet;
+use Uro\TeltonikaFmParser\Support\Crc16;
 
 abstract class BaseCodec implements Codec
 {
     protected $reader;
 
+    /**
+     * BaseCodec8 constructor.
+     * @param $reader
+     */
     public function __construct(Reader $reader)
     {
         $this->reader = $reader;
+        $this->reader->setPosition(0);
     }
 
-    public function decodeAvlDataCollection(): AvlDataCollection
+    abstract public function decode();
+
+    public function checkCrc()
     {
-        $avlDataCollection = new AvlDataCollection(
-            $this->reader->readUInt8(),     // Codec ID
-            $this->reader->readUInt8()      // Number of data
-        );
+        $this->reader->setPosition(0);
 
-        $avlData = [];
-        for($i = 0; $i < $avlDataCollection->getNumberOfData(); $i++) {
-            $avlData[] = $this->decodeAvlData();
-        }
-        $avlDataCollection->setAvlData($avlData);
+        $data = bin2hex($this->reader->getInputString());
 
-        $this->checkNumberOfData($avlDataCollection->getNumberOfData());
-        
-        return $avlDataCollection;
-    }
+        $input = substr($data,16, strlen($data) - 24);
+        $input = hex2bin($input);
 
-    private function checkNumberOfData($expected)
-    {
-        $lastNumberOfData = $this->reader->readUInt8();
-        if($expected != $lastNumberOfData) {
-            throw new NumberOfDataMismatchException(
-                $expected, 
-                $lastNumberOfData
-            );
-        }
-    }
+        $crc = substr($data,-4);
 
-    public function decodeAvlData(): AvlData
-    {
-        return new AvlData(
-            $this->reader->readUInt64(),    // Timestamp
-            $this->reader->readUInt8(),     // Priority
-            $this->decodeGpsElement(),      // GPS Element
-            $this->decodeIoElement()        // IO Element
-        );
-    }
-
-    public function decodeGpsElement(): GpsElement
-    {
-        return new GpsElement(
-            $this->decodeCoordinate(),      // Longitude
-            $this->decodeCoordinate(),      // Latitude
-            $this->reader->readUInt16(),    // Altitude
-            $this->reader->readUInt16(),    // Angle
-            $this->reader->readUInt8(),     // Satellites
-            $this->reader->readUInt16()     // Speed
-        );
-    }
-
-    protected function decodeCoordinate(): float
-    {
-        return unpack('l', pack('l', $this->reader->readUInt32()))[1] / 10000000;
+        return $crc == dechex((new Crc16)->calc($input));
     }
 }

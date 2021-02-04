@@ -3,7 +3,7 @@
 namespace Tests\Unit\Model;
 
 use PHPUnit\Framework\TestCase;
-use Uro\TeltonikaFmParser\Model\IoElement;
+use Uro\TeltonikaFmParser\Model\Codec8\IoElement;
 
 class IoElementTest extends TestCase
 {

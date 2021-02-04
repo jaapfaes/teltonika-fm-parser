@@ -1,6 +1,8 @@
 <?php 
 
-namespace Uro\TeltonikaFmParser\Model;
+namespace Uro\TeltonikaFmParser\Model\Codec8;
+
+use Uro\TeltonikaFmParser\Model\Model;
 
 class GpsElement extends Model
 {

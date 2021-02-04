@@ -3,8 +3,8 @@
 namespace Tests\Unit\Protocol\Tcp;
 
 use PHPUnit\Framework\TestCase;
-use Uro\TeltonikaFmParser\Protocol\Tcp\Packet;
-use Uro\TeltonikaFmParser\Model\AvlDataCollection;
+use Uro\TeltonikaFmParser\Model\Codec8\Packet;
+use Uro\TeltonikaFmParser\Model\Codec8\AvlDataCollection;
 
 class PacketTest extends TestCase
 {

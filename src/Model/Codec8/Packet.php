@@ -1,9 +1,8 @@
 <?php 
 
-namespace Uro\TeltonikaFmParser\Protocol\Tcp;
+namespace Uro\TeltonikaFmParser\Model\Codec8;
 
 use Uro\TeltonikaFmParser\Support\Crc16;
-use Uro\TeltonikaFmParser\Model\AvlDataCollection;
 use Uro\TeltonikaFmParser\Support\Acknowledgeable;
 
 class Packet implements Acknowledgeable
@@ -15,7 +14,7 @@ class Packet implements Acknowledgeable
     /**
      * Undocumented variable
      *
-     * @var Uro\TeltonikaFmParser\Model\AvlDataCollection
+     * @var Uro\TeltonikaFmParser\Model\Codec8\AvlDataCollection
      */
     private $avlDataCollection;
 
