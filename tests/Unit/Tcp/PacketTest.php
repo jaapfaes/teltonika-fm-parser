@@ -33,30 +33,18 @@ class PacketTest extends TestCase
     /** @test */
     public function can_get_avl_data_array_length()
     {
-        $this->assertEquals(2, $this->packet->getAvlDataArrayLength());
+        $this->assertEquals(2, $this->packet->getLength());
     }
 
     /** @test */
     public function can_get_avl_data_collection()
     {
-        $this->assertEquals($this->avlDataCollection, $this->packet->getAvlDataCollection());
+        $this->assertEquals($this->avlDataCollection, $this->packet->getBody());
     }
 
     /** @test */
     public function can_get_crc()
     {
         $this->assertEquals(0x2b60, $this->packet->getCrc());
-    }
-
-    /** @test */
-    public function can_check_crc_valid_data()
-    {
-        $this->assertTrue($this->packet->checkCrc(hex2bin('8e0000')));
-    }
-
-    /** @test */
-    public function can_check_crc_invalid_data()
-    {
-        $this->assertFalse($this->packet->checkCrc(hex2bin('8f0000')));
     }
 }

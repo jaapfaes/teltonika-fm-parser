@@ -4,8 +4,9 @@ namespace Uro\TeltonikaFmParser\Model\Codec8;
 
 use Uro\TeltonikaFmParser\Support\Crc16;
 use Uro\TeltonikaFmParser\Support\Acknowledgeable;
+use Uro\TeltonikaFmParser\Model\Packet as PacketContract;
 
-class Packet implements Acknowledgeable
+class Packet implements Acknowledgeable, PacketContract
 {
     private $preamble;
 
@@ -43,17 +44,12 @@ class Packet implements Acknowledgeable
      *
      * @return int
      */
-    public function getAvlDataArrayLength(): int 
+    public function getLength(): int
     {
         return $this->avlDataArrayLength;
     }
 
-    /**
-     * Get AVL data collection
-     *
-     * @return AvlDataCollection
-     */
-    public function getAvlDataCollection(): AvlDataCollection 
+    public function getBody()
     {
         return $this->avlDataCollection;
     }
@@ -78,13 +74,8 @@ class Packet implements Acknowledgeable
         return $this->crc;
     }
 
-    /**
-     * Check if packet CRC equals calculated CRC
-     *
-     * @return boolean
-     */
-    public function checkCrc(string $input): bool
+    public function getCodec()
     {
-        return $this->crc == (new Crc16)->calc($input);
+        return $this->avlDataCollection->getCodecId;
     }
 }

@@ -28,8 +28,8 @@ class DecoderTest extends TestCase
 
         $this->assertNotNull($packet);
         $this->assertEquals(0, $packet->getPreamble());
-        $this->assertEquals(3, $packet->getAvlDataArrayLength());
-        $this->assertEquals(0x08, $packet->getAvlDataCollection()->getCodecId());
+        $this->assertEquals(3, $packet->getLength());
+        $this->assertEquals(0x08, $packet->getBody()->getCodecId());
         $this->assertEquals(0x0000c281, $packet->getCrc());
     }
 
@@ -45,8 +45,8 @@ class DecoderTest extends TestCase
 
         $this->assertNotNull($packet);
         $this->assertEquals(0, $packet->getPreamble());
-        $this->assertEquals(3, $packet->getAvlDataArrayLength());
-        $this->assertEquals(0x8E, $packet->getAvlDataCollection()->getCodecId());
+        $this->assertEquals(3, $packet->getLength());
+        $this->assertEquals(0x8E, $packet->getBody()->getCodecId());
         $this->assertEquals(0x00002b60, $packet->getCrc());
     }
 

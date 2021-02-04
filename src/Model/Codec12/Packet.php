@@ -2,9 +2,9 @@
 
 namespace Uro\TeltonikaFmParser\Model\Codec12;
 
-use Uro\TeltonikaFmParser\Io\Reader;
+use Uro\TeltonikaFmParser\Model\Packet as PacketContract;
 
-class Packet
+class Packet implements PacketContract
 {
     protected $preamble;
     protected $length;
