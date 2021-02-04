@@ -8,6 +8,10 @@ You could use this library in your server, it will help you talk with Teltonika 
 
 It was build with [Teltonika protocols v2.10](FMXXXX_Protocols_v2.10.pdf) documentation.
 
+## On this fork: (jaapfaes/teltonika-fm-parser) 
+
+- Support for decoding codec12 messages - work in progress
+
 ## Requirements:
 
 ```json
