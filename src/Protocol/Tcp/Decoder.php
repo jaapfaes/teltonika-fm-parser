@@ -2,15 +2,15 @@
 
 namespace Uro\TeltonikaFmParser\Protocol\Tcp;
 
+use Uro\TeltonikaFmParser\Codec\BaseCodec;
 use Uro\TeltonikaFmParser\Io\Reader;
 use Uro\TeltonikaFmParser\Codec\Codec8;
 use Uro\TeltonikaFmParser\Codec\Codec8Extended;
 use Uro\TeltonikaFmParser\Codec\Codec12;
 use Uro\TeltonikaFmParser\Exception\UnsupportedCodecException;
 use Uro\TeltonikaFmParser\Exception\CrcMismatchException;
-use Uro\TeltonikaFmParser\Model\Codec8\Packet;
 use Uro\TeltonikaFmParser\Model\Imei;
-use Uro\TeltonikaFmParser\Support\Crc16;
+use Uro\TeltonikaFmParser\Model\Packet;
 
 class Decoder 
 {
@@ -22,7 +22,7 @@ class Decoder
         0x0C => Codec12::class,
     ];
 
-    public function decodeImei($data)
+    public function decodeImei($data): Imei
     {
         $this->reader = new Reader($data);
 
@@ -31,7 +31,7 @@ class Decoder
         return new Imei($this->reader->readBytes($numberOfBytes));
     }
 
-    public function decodeData($data)
+    public function decodeData($data): Packet
     {
         $codec = $this->getCodec($data);
 
@@ -41,7 +41,7 @@ class Decoder
         return $codec->decode();
     }
 
-    private function getCodec($data)
+    private function getCodec($data): BaseCodec
     {
         $this->reader = new Reader($data);
 
